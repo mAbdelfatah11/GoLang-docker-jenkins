@@ -6,7 +6,7 @@ FROM registry.semaphoreci.com/golang:1.18 as builder
 ENV APP_HOME /go/src/goviolin
 
 WORKDIR "$APP_HOME"
-COPY . .
+COPY src/ .
 
 RUN go mod download
 RUN go mod verify
@@ -19,7 +19,7 @@ ENV APP_HOME /go/src/goviolin
 RUN mkdir -p "$APP_HOME"
 WORKDIR "$APP_HOME"
 
-COPY . .
+COPY src/ .
 COPY --from=builder "$APP_HOME"/goviolin $APP_HOME
 
 EXPOSE 8080
