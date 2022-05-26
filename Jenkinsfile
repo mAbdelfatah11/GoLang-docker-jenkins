@@ -12,8 +12,8 @@ pipeline {
                 sh 'go build -v .'
             }
         }
-    }
-    	stage('build'){
+    
+        stage('build'){
     	    steps{
     	    	sh 'echo "$DOCKER_PASSWORD" | docker login  --username "$DOCKER_USERNAME" --password-stdin'
 		//sh 'docker pull $DOCKER_USERNAME/mathapp-production:latest'
@@ -22,6 +22,7 @@ pipeline {
     	    
     	    }	
     	
+    	}
     	}
 }
 
