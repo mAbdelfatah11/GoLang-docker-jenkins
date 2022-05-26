@@ -9,7 +9,7 @@ pipeline {
     stages {
         stage('Compile') {
             steps {
-		sh 'go get ./...
+		sh 'go get ./...'
 		sh 'go test ./...'
 		sh 'go build -v .'
 
