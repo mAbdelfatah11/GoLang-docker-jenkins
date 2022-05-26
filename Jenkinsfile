@@ -15,11 +15,12 @@ pipeline {
     
         stage('build'){
     	    steps{
-    	    	sh 'echo "$DOCKER_PASSWORD" | docker login  --username "$DOCKER_USERNAME" --password-stdin'
-		//sh 'docker pull $DOCKER_USERNAME/mathapp-production:latest'
-		sh 'docker build -f Dockerfile -t $DOCKER_USERNAME/goviolin-production .'
-		sh 'docker push $DOCKER_USERNAME/goviolin-production'
-    	    
+		    echo "building the docker image..."
+		    withCredentials([usernamePassword(credentialsId: 'Dockerhub-Credentails', passwordVariable: 'PASS', usernameVariable: 'USER')]) {
+			sh "docker build -t mabdelfatah/goviolin:v0.0.0 ."
+			sh "echo $PASS | docker login -u $USER --password-stdin"
+			sh "docker push mabdelfatah/goviolin:v0.0.0"
+		    	    
     	    }	
     	
     	}
