@@ -1,4 +1,15 @@
-# GoViolin
+## Dockerize Go app with Jenkins
+
+in this demo i'm going to:
+- try to package, dockerize and run the built GoLang-app image locally, then
+- using jenkins CI/CD tool to automate package, build and push docker image to Docker-Hub repo manager. 
+
+### provisioning app locally
+
+
+
+
+
 
 GoViolin is a web app written in Go that helps with violin practice.
 

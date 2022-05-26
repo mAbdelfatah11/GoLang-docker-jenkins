@@ -1,0 +1,39 @@
+# create Deployment that creates and tracks 2 replicas of our app.
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: goviolin-app
+  name: goviolin-app
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: goviolin-app
+  template:
+    metadata:
+      labels:
+        app: goviolin-app
+    spec:
+      containers:
+      - image: mabdelfatah/goviolin:v0.0.0
+        name: goviolin
+        ports:
+        - containerPort: 8080
+
+# create external service with type loadbalancer in order pod to be accessable outside cluster.
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: goviolin-service
+spec:
+  selector:
+    app: goviolin-app
+  type: LoadBalancer  
+  ports:
+    - protocol: TCP
+      port: 8080
+      targetPort: 8080
+      nodePort: 30000

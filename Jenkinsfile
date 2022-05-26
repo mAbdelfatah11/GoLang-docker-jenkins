@@ -7,7 +7,7 @@ pipeline {
         GO111MODULE = 'on'
     }
     stages {
-        stage('Compile') {
+        stage('Compile to artifact') {
             steps {
 		sh 'go get ./...'
 		//sh 'go test ./...'
@@ -16,7 +16,7 @@ pipeline {
             }
         }
     
-        stage('build'){
+        stage('build push docker image'){
     	    steps{
 		    echo "building the docker image..."
 		    withCredentials([usernamePassword(credentialsId: 'Dockerhub-Credentails', passwordVariable: 'PASS', usernameVariable: 'USER')]){
